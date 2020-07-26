@@ -46,8 +46,11 @@ if __name__ == "__main__":
     )
     for i, fname in enumerate(fnames):
         print(".", end="", flush=True)
-        img = cv2.imread(fname)
-        img_small = cv2.resize(img, target_size)
+        try:
+            img = cv2.imread(fname)
+            img_small = cv2.resize(img, target_size)
+        except Exception as e:
+            print(str(e))
         new_fname = "{}.{}".format(str(i), ext)
         small_fname = os.path.join(save_dir, new_fname)
         cv2.imwrite(small_fname, img_small)
